@@ -7,7 +7,7 @@ import { logout } from "../../../redux/auth/auth-operations";
 import styles from "./navbar-user.module.scss";
 
 const NavbarUser = () => {
-    const {name} = useSelector(getUser);
+    const {username} = useSelector(getUser);
 
     const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ const NavbarUser = () => {
 
     return (
         <div>
-            {name}, <button onClick={onLogout}>Logout</button>
+            {username}, <button onClick={onLogout}>Logout</button>
         </div>
     )
 }

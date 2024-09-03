@@ -27,20 +27,21 @@ instance.interceptors.response.use(
 );
 
 export const register = async (data) => {
-    const { data: result } = await instance.post("/auth/register", data);
+    const { data: result } = await instance.post("/auth/signup", data);
     setToken(result.token);
     return result;
 }
 
 export const login = async (data) => {
-    const { data: result } = await instance.post("/auth/login", data);
+    const { data: result } = await instance.post("/auth/signin", data);
     setToken(result.token);
+    console.log(result);
     // localStorage.setItem("refreshToken", result.refreshToken)
     return result;
 }
 
 export const logout = async () => {
-    const { data } = await instance.post("/auth/logout");
+    const { data } = await instance.post("/auth/signout");
     setToken();
     return data;
 }

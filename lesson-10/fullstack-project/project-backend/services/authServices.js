@@ -40,5 +40,11 @@ export const signin = async data => {
     const token = createToken(payload);
     await updateUser({_id: user._id}, {token});
     
-    return {token};
+    return {
+        user: {
+            email: user.email,
+            username: user.username,
+        },
+        token
+    };
 }

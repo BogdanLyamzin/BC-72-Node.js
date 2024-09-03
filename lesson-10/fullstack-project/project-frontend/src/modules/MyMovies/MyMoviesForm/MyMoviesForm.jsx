@@ -1,4 +1,5 @@
 import InputMask from 'react-input-mask';
+import { useRef } from 'react';
 
 import useForm from "../../../shared/hooks/useForm";
 
@@ -8,7 +9,7 @@ import styles from "./my-books-form.module.scss";
 
 const MyMoviesForm = ({ onSubmit }) => {
     const { state, handleChange, reset } = useForm({ initialState, onSubmit });
-
+    const posterRef = useRef();
     const handleSubmit = e => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -46,7 +47,7 @@ const MyMoviesForm = ({ onSubmit }) => {
             </div>
             <div className={styles.formGroup}>
                 <label>Poster</label>
-                <input name="poster" type="file" />
+                <input ref={posterRef} name="poster" type="file" />
             </div>
             <button type="submit">Add movie</button>
         </form>

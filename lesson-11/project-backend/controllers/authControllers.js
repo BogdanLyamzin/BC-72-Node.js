@@ -11,24 +11,38 @@ const signup = async(req, res)=> {
     })
 }
 
+const verify = async(req, res)=> {
+    const {verificationCode} = req.params;
+    await authServices.verifyUser(verificationCode);
+
+    res.json({
+        message: "Email verified successfully"
+    })
+}
+
+const resendVerify = async(req, res)=> {
+    const {email} = req.body;
+    await authServices.resendVerifyEmail(email);
+
+    res.json({
+        message: "Verify email send again"
+    })
+}
+
 const signin = async(req, res)=> {
-    const {token, user} = await authServices.signin(req.body);
+    const {token} = await authServices.signin(req.body);
 
     res.json({
         token,
-        user,
     })
 }
 
 const getCurrent = (req, res)=> {
-    const {token, username, email} = req.user;
+    const {username, email} = req.user;
 
     res.json({
-        token,
-        user: {
-            username,
-            email,
-        }
+        username,
+        email,
     });
 }
 
@@ -43,6 +57,8 @@ const signout = async(req, res)=> {
 
 export default {
     signup: ctrlWrapper(signup),
+    resendVerify: ctrlWrapper(resendVerify),
+    verify: ctrlWrapper(verify),
     signin: ctrlWrapper(signin),
     getCurrent: ctrlWrapper(getCurrent),
     signout: ctrlWrapper(signout),
